@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>归档页</title>
+		<script src="../static/js/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<link rel="stylesheet" href="../static/css/mycss.css">
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="ui inverted attached segment my-Navbar my-shadow-small">
+			<div class="ui container">
+				<div class="ui inverted stackable menu">
+					<h2 class="ui teal header item">libowen</h2>
+					   <a href="#" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
+					   <a href="#" class=" my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
+					   <a href="#" class="active my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
+					   <a href="#" class=" my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
+					   <a href="#" class="my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
+					   <div class="right my-item  item my-mobile-hide">
+						   <div class="ui icon  input">
+							   <input type="text" placeholder="Search..."/>
+							   <i class="search link icon"></i>
+						   </div>
+					   </div>
+				</div>
+			</div>
+			<a href="#" class="ui menu toggle black icon button my-right-top my-mobile-show">
+				<i class="sidebar icon"></i>
+			</a>
+		</nav>
+		<br/>
+		<br/>
+		<br/>
+		<!-- 中间内容 -->
+		<div class="my-contain">
+			<div class="ui container">
+				<div class="ui attached segment">
+					<div class="ui two column grid">
+						<div class="column">
+						<h3 class="ui teal header">归档</h3>
+						</div>
+					<div class="right aligned column">
+						共<h3 class="ui orange header my-inline-block">14</h3>个
+					</div>
+					</div>
+				</div>
+			</div>
+			<h2 class="ui center aligned header">2021</h2>
+			<div class="ui fluid vertical menu">
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+			</div>
+			<h2 class="ui center aligned header">2020</h2>
+			<div class="ui fluid vertical menu">
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+			</div>
+			<h2 class="ui center aligned header">2019</h2>
+			<div class="ui fluid vertical menu">
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+				<a href="#" target="_blank" class="item">
+				  <span>
+					<i class="ui teal circle icon"></i>中国优秀散文
+					<div class="ui teal left pointing basic label">9月15日</div>
+				  </span>
+					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
+				  
+				</a>
+			</div>
+		</div>
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+		<!-- 底部部分 -->
+		<footer class="ui inverted vertical segment">
+			<div class="ui center aligned container">
+				<!-- 相当于bootstarp把一行分割成16份 -->
+				<div class="ui inverted divided stackable grid">
+					<div class="three wide column">
+					  <img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 150px;"/>
+					 </div>
+					<div class="four wide column">
+						<h4 class="ui inverted header">最新博客</h4>
+						<div class="ui inverted link list">
+							<a href="#" class="item">...</a>
+							<a href="#" class="item">...</a>
+							<a href="#" class="item">...</a>
+						</div>
+					</div>
+					<div class="four wide column">
+						<h4 class="ui inverted header">联系方式</h4>
+						<div class="ui inverted link list">
+							<span>邮箱：319871391@qq.com</span>
+							<br />
+							<br />
+							<span>QQ:31987191</span>
+						</div>
+					</div>
+					<div class="five wide column">
+						<h4 class="ui inverted header">libowen</h4>
+						<p>欢迎大家一起来交流学习</p>
+					</div>
+				</div>
+				<div class="ui inverted section divider"></div>
+					<p>禁止转载什么一些乱七八糟的东西</p>
+			</div>
+		</footer>
+		<script>
+		/* 菜单在手机端的点击显示 */
+		  $('.menu.toggle').click(function(){
+			  $('.my-item').toggleClass('my-mobile-hide');
+		  });
+		 
+		</script>
+	</body>
+</html>

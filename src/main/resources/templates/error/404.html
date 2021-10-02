@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>404页面</title>
+    <script src="../static/js/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <link rel="stylesheet" href="static/css/mycss">
+</head>
+<body>
+<!-- 导航栏 -->
+<nav class="ui inverted attached segment my-Navbar my-shadow-small">
+    <div class="ui container">
+        <div class="ui inverted stackable menu">
+            <h2 class="ui teal header item">libowen</h2>
+            <a href="#" class=" my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
+            <a href="#" class="my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
+            <a href="#" class="my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
+            <a href="#" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
+            <a href="#" class="my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
+            <div class="right my-item  item my-mobile-hide">
+                <div class="ui icon  input">
+                    <input type="text" placeholder="Search..."/>
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<h1>404</h1>
+
+</body>
+</html>

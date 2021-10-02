@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head th:replace="_fragments :: head(~{::title})">
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+		<title>关于我</title>
+		<script src="../static/js/jquery-3.6.0.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+		<link rel="stylesheet" href="../static/css/mycss.css">
+	</head>
+	<body>
+		<!-- 导航栏 -->
+		<nav class="ui inverted attached segment my-Navbar my-shadow-small">
+			<div class="ui container">
+				<div class="ui inverted stackable menu">
+					<h2 class="ui teal header item">libowen</h2>
+					   <a href="#" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
+					   <a href="#" class=" my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
+					   <a href="#" class="my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
+					   <a href="#" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
+					   <a href="#" class="active my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
+					   <div class="right my-item  item my-mobile-hide">
+						   <div class="ui icon  input">
+							   <input type="text" placeholder="Search..."/>
+							   <i class="search link icon"></i>
+						   </div>
+					   </div>
+				</div>
+			</div>
+			<a href="#" class="ui menu toggle black icon button my-right-top my-mobile-show">
+				<i class="sidebar icon"></i>
+			</a>
+		</nav>
+		<br/>
+		<br/>
+		<br/>
+		<!-- 中间内容 -->
+		<div class="my-contain">
+		<div class="ui contain">
+			<div class="ui stackable grid">
+				<div class="ten wide column">
+						<img src="../static/img/pepole.jpg" class="ui  rounded image" style="width: 450px;height: 400px;"/>
+				</div>
+				<div class="six wide column">
+					<div class="ui top center aligned segment">
+						<div class="ui header">关于我</div>
+					</div>
+					<div class="ui segment">
+						<p>一些自我介绍</p>
+					</div>
+					<div class="ui segment">
+					   <div class="ui orange basic label">编程</div>
+					   <div class="ui orange basic label">篮球</div>
+					   <div class="ui orange basic label">游戏</div>
+					   <div class="ui orange basic label">阅读</div>
+					</div>
+					<div class="ui segment">
+					   <div class="ui teal basic label">Java</div>
+					   <div class="ui teal basic label">Spring</div>
+					   <div class="ui teal basic label">Mysql</div>
+					   <div class="ui teal basic label">Redis</div>
+					   <div class="ui teal basic label">Dubbo</div>
+					</div>
+					<div class="ui bottom segment">
+						<a class="ui wechat circular icon button"><i class="weixin icon"></i></a>
+						<a class="ui qq circular icon button" data-content="319871391"><i class="qq icon"></i></a>
+					</div>
+					<div class="ui weixin-QR flowing popup transition hidden">
+						<img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 110px;" />
+					 </div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<br/>
+		<!-- 底部部分 -->
+		<footer class="ui inverted vertical segment">
+			<div class="ui center aligned container">
+				<!-- 相当于bootstarp把一行分割成16份 -->
+				<div class="ui inverted divided stackable grid">
+					<div class="three wide column">
+					  <img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 150px;"/>
+					 </div>
+					<div class="four wide column">
+						<h4 class="ui inverted header">最新博客</h4>
+						<div class="ui inverted link list">
+							<a href="#" class="item">...</a>
+							<a href="#" class="item">...</a>
+							<a href="#" class="item">...</a>
+						</div>
+					</div>
+					<div class="four wide column">
+						<h4 class="ui inverted header">联系方式</h4>
+						<div class="ui inverted link list">
+							<span>邮箱：319871391@qq.com</span>
+							<br />
+							<br />
+							<span>QQ:31987191</span>
+						</div>
+					</div>
+					<div class="five wide column">
+						<h4 class="ui inverted header">libowen</h4>
+						<p>欢迎大家一起来交流学习</p>
+					</div>
+				</div>
+				<div class="ui inverted section divider"></div>
+					<p>禁止转载什么一些乱七八糟的东西</p>
+			</div>
+		</footer>
+		<script>
+		/* 菜单在手机端的点击显示 */
+		  $('.menu.toggle').click(function(){
+			  $('.my-item').toggleClass('my-mobile-hide');
+		  });
+		  /* qq弹出*/
+		 $('.qq').popup();
+		 /* 微信弹出二维码*/
+		 $('.wechat').popup({
+			  popup :$('.weixin-QR.popup'),
+			  on:'click',
+			  position:'bottom center',
+		 });
+		</script>
+	</body>
+</html>
