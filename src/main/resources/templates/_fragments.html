@@ -4,11 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <title th:replace="${title}">详情页</title>
-    <script src="../static/js/jquery-3.6.0.min.js"></script>
+    <script src="../static/js/jquery-3.6.0.min.js" th:src="@{/js/jquery-3.6.0.min.js}"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-    <script src="../static/lib/prism/prism.js"></script>
-    <script src="../static/lib/tocbot/tocbot.min.js"></script>
-    <script src="../static/lib/qrcode/qrcode.min.js"></script>
+    <script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+    <script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+    <script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css ">
     <link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -17,6 +17,49 @@
     <link rel="stylesheet" href="../static/css/mycss.css" th:href="@{/css/mycss.css}">
 </head>
 <body>
+<footer th:fragment="footer" class="ui inverted vertical segment">
+    <div class="ui center aligned container">
+        <!-- 相当于bootstarp把一行分割成16份 -->
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" class="ui rounded image" style="width: 150px;"/>
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header">最新博客</h4>
+                <div id="newblog-container">
+                    <div class="ui inverted link list"  th:fragment="newblog" >
+                        <a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank"  class="item" th:each="blog : ${newblogs}" >
+                            <span th:text="${blog.title}">散文</span>
+                        </a>
+                    </div>
+                </div>
 
+            </div>
+            <div class="four wide column">
+                <h4 class="ui inverted header">联系方式</h4>
+                <div class="ui inverted link list">
+                    <span>邮箱：319871391@qq.com</span>
+                    <br />
+                    <br />
+                    <span>QQ:31987191</span>
+                </div>
+            </div>
+            <div class="five wide column">
+                <h4 class="ui inverted header">libowen</h4>
+                <p>欢迎大家一起来交流学习</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p>禁止转载什么一些乱七八糟的东西</p>
+    </div>
+</footer>
+<th:block th:fragment="script">
+<script>
+    $('#newblog-container').load(/*[[@{/newblogs}]]*/"/newblogs");
+   $('.menu.toggle').click(function(){
+       $('.my-item').toggleClass('my-mobile-hide');
+   });
+</script>
+</th:block>
 </body>
 </html>

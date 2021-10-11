@@ -4,17 +4,18 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 		<title>详情页</title>
-		<script src="../static/js/jquery-3.6.0.min.js"></script>
+		<script src="../static/js/jquery-3.6.0.min.js" th:src="@{/js/jquery-3.6.0.min.js}"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-		<script src="../static/lib/prism/prism.js"></script>
-		<script src="../static/lib/tocbot/tocbot.min.js"></script>
-		<script src="../static/lib/qrcode/qrcode.min.js"></script>
+		<script src="../static/lib/prism/prism.js" th:src="@{/lib/prism/prism.js}"></script>
+		<script src="../static/lib/tocbot/tocbot.min.js" th:src="@{/lib/tocbot/tocbot.min.js}"></script>
+		<script src="../static/lib/qrcode/qrcode.min.js" th:src="@{/lib/qrcode/qrcode.min.js}"></script>
+	    <script src="../static/js/jquery.scrollTo.min.js" th:src="@{/js/jquery.scrollTo.min.js}"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-		<link rel="stylesheet" href="../static/css/typo.css">
+		<link rel="stylesheet" href="../static/css/typo.css" th:href="@{/css/typo.css}">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-		<link rel="stylesheet" href="../static/lib/prism/prism.css" />
-		<link rel="stylesheet" href="../static/lib/tocbot/tocbot.css">
-		<link rel="stylesheet" href="../static/css/mycss.css">
+		<link rel="stylesheet" href="../static/lib/prism/prism.css" th:href="@{/lib/prism/prism.css}" />
+		<link rel="stylesheet" href="../static/lib/tocbot/tocbot.css" th:href="@{/lib/tocbot/tocbot.css}">
+		<link rel="stylesheet" href="../static/css/mycss.css" th:href="@{/css/mycss.css}">
 		
 	</head>
 	<body>
@@ -23,17 +24,20 @@
 			<div class="ui container">
 				<div class="ui inverted stackable menu">
 					<h2 class="ui teal header item">libowen</h2>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
-					   <div class="right my-item  item my-mobile-hide">
-						   <div class="ui icon  input">
-							   <input type="text" placeholder="Search..."/>
-							   <i class="search link icon"></i>
-						   </div>
-					   </div>
+					<a href="#" th:href="@{/}" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
+					<a href="#"  th:href="@{/types/-1}" class="active my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
+					<a href="#"  th:href="@{/archives}" class="my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
+					<a href="#" th:href="@{/tags/-1}" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
+					<a href="#"  th:href="@{/aboutme}" class="my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
+					<div class="right my-item  item my-mobile-hide">
+						<form name="search" th:action="@{/search}" method="post" target="_blank">
+							<div class="ui icon  input">
+								<input name="query" type="text" placeholder="Search..." th:value="${query}"/>
+								<i onclick="document.forms['search'].submit()" class="search link icon"></i>
+							</div>
+						</form>
+
+					</div>
 				</div>
 			</div>
 			<a href="#" class="ui menu toggle black icon button my-right-top my-mobile-show">
@@ -49,51 +53,37 @@
 			<div class="ui top attached segment">
 				<div class="ui horizontal link list">
 					<div class="item">
-						<img src="https://picsum.photos/seed/picsum/100/100" class="ui avatar image" />
-						<div class="content"><a href="#" class="header">李博文</a></div>
+						<img src="https://picsum.photos/seed/picsum/100/100" th:src="@{${blog.user.avatar}}"  class="ui avatar image" />
+						<div class="content"><a href="#" class="header" th:text="${blog.user.nickname}">李博文</a></div>
 					</div>
 					<div class="item">
-						<i class="calendar icon"></i>2021-9-24
+						<i class="calendar icon"></i><span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2021-9-24</span>
 					</div>
 					<div class="item">
-						<i class="eye icon"></i>4036
+						<i class="eye icon"></i><sapn th:text="${blog.views}">4036</sapn>
 					</div>
 				</div>
 			</div>
 			<div class="ui attached segmentfile:///C:/Users/ASUS/Desktop/prism.css
-file:///C:/Users/ASUS/Desktop/prism.js
-file:///C:/Users/ASUS/Desktop/prism.css
-file:///C:/Users/ASUS/Desktop/prism.js
-">
+					file:///C:/Users/ASUS/Desktop/prism.js
+					file:///C:/Users/ASUS/Desktop/prism.css
+					file:///C:/Users/ASUS/Desktop/prism.js
+					">
 				<!-- 图片 -->
-				<img src="https://picsum.photos/seed/picsum/100/80" class="ui fluid rounded image" />
+				<img src="https://picsum.photos/seed/picsum/100/80" th:src="@{${blog.firstPicture}}" class="ui fluid rounded image" />
 			</div>
 			<div class="ui attached segment">
 				<!-- 博客内容 -->
 				<div class="ui right aligned basic segment">
-					<div class="ui orange label">原创</div>
+					<div class="ui orange label" th:text="${blog.flag}">原创</div>
 				</div>
-				<h2 class="ui center aligned header">追忆似水流年</h2> 
+				<h2 class="ui center aligned header" th:text="${blog.title}">追忆似水流年</h2>
 				<br/>
-				<div id="content" class="js-toc-contentfile:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.min.js
-file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
- my-padding-lr">
-					<pre><code class="language-css">p { color: red }</code></pre>
-					<h3>第一段</h3>
-					<p>　迷离的夜空，灰黑色的天际悬着一轮金色的孤舟，载着满仓的梦想，驶向云层深处;凉风微微的吹袭着黑夜的素纱，掸掉岁月的风尘;融融的月光静静的流淌，
-					冲断记忆的决堤;零星点点，柔柔的洒在树叶上，泛出浅浅的绿;如华的银色裹住一丝清凉，铺设一地的奢华。</p>
-					<h3>第二段</h3>
-					<p>　河畔的柳枝轻轻的摇曳，拨弄着记忆的琴弦。尘封的岁月是一湾被搁浅的死水，静静的沉淀，再慢慢的发酵，冒出珍珠一样的泡沫，被虚无缥缈的未来击破。
-					岁月的文字，总在日记本里静静的躺着，是为了记录过去的失意，还是为了宣泄往昔的情感?沧海变桑田的时候，又会有多少的落寞、惆怅在这里定格?</p>
-					<h3>第三段</h3>
-					<p>
-						记忆是挂在窗前的风铃，总会伴随岁月的风轻轻的摇曳，发出银铃般的声响。当你在羡慕她的清脆悦耳时，却忘了她也在接受着岁月的考验。“雕栏玉砌应尤在，
-						只是朱颜改”，记忆也会随着岁月的风慢慢的褪色，她也会在“灿烂中死去”，却无法在“灰烬里重生”。遇见了，忽视了，流走了，又懊悔了!
-						每天都是在这种相互交错，却又永远平行的矛盾的情感漂移不定。任岁月留下一串串泪痕，想要擦掉，却烙在了心里。“问君能有几多愁，恰似一江春水向东流”!只能是感叹，感叹，感叹!“空悲切，白了少年头”啊!
-					</p>
+				<div id="content" th:utext="${blog.content}">
+
 				</div>
-				<div class="ui basic segment my-padding-lr">
-					<div class="ui teal left pointing basic  label ">方法论</div>
+				<div class="ui basic segment my-padding-lr" th:each="tag : ${blog.tags}">
+					<div class="ui teal left pointing basic  label " th:text="${tag.name}">方法论</div>
 				</div>
 				<div class="ui center aligned basic segment">
 					<button id="paybutton" class="ui orange basic circular button">赞赏</button>
@@ -102,11 +92,11 @@ file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
 				<div class="ui orange basic label">
 					<div class="ui images" style="font-size: inherit;">
 						<div class="ui image">
-							<img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 120px;"/>
+							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}"  class="ui rounded image" style="width: 120px;"/>
 							<div>微信</div>
 						</div>
 						<div class="ui image">
-							<img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 120px;"/>
+							<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" class="ui rounded image" style="width: 120px;"/>
 							<div>支付宝</div>
 						</div>
 					</div>
@@ -118,101 +108,46 @@ file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
 				<div class="ui middle aligned grid">
 					<div class="eleven wide column">
 						<ui class="list">
-							<li>作者：李博文</li>
-							<li>发表时间：2021-9-24</li>
-							<li>版权声明：--------</li>
-							<li>公众号转载：---------</li>
+							<li>作者：<span th:text="${blog.user.nickname}">李博文</span></li>
+							<li>发表时间：<span th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd HH:mm')}">2021-9-24</span></li>
+							<li>版权声明：自由转载-禁止商用-保持署名</li>
+							<li>公众号转载：请添加作者微信</li>
 						</ui>
 					</div>
 					<div class="five wide column">
-						<img src="../static/img/wechat.jpg" alt="" class="ui right floated rounded bordered image" style="width: 110px;">
+						<img src="../static/img/wechat.jpg" alt="" th:src="@{/img/wechat.jpg}" class="ui right floated rounded bordered image" style="width: 110px;">
 					</div>
 				</div>
 			</div>
-			<div class="ui bottom attached segment">
-				<div class="ui comments">
+			<div class="ui bottom attached  segment">
+				<div id="comment-container" class="ui teal comments" >
+					<div  th:fragment="commentlist">
 				  <h3 class="ui dividing header">Comments</h3>
-				  <div class="comment">
+				  <div class="comment" th:each="comment : ${comments}">
 				    <a class="avatar">
-				      <img src="../static/img/pepole.jpg">
+				      <img src="../static/img/pepole.jpg" th:src="@{${comment.avatar}">
 				    </a>
 				    <div class="content">
-				      <a class="author">Matt</a>
+				      <a class="author" th:text="${comment.nickname}">Matt</a>
 				      <div class="metadata">
-				        <span class="date">Today at 5:42PM</span>
+				        <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd hh-mm')}">Today at 5:42PM</span>
 				      </div>
-				      <div class="text">
+				      <div class="text" th:text="${comment.content}">
 				        How artistic!
 				      </div>
 				      <div class="actions">
-				        <a class="reply">回复</a>
+				        <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}",onclick="reply(this)">回复</a>
 				      </div>
 				    </div>
 				  </div>
-				  <div class="comment">
-				    <a class="avatar">
-				      <img src="../static/img/pepole.jpg">
-				    </a>
-				    <div class="content">
-				      <a class="author">Elliot Fu</a>
-				      <div class="metadata">
-				        <span class="date">Yesterday at 12:30AM</span>
-				      </div>
-				      <div class="text">
-				        <p>This has been very useful for my research. Thanks as well!</p>
-				      </div>
-				      <div class="actions">
-				        <a class="reply">回复</a>
-				      </div>
-				    </div>
-				    <div class="comments">
-				      <div class="comment">
-				        <a class="avatar">
-				           <img src="../static/img/pepole.jpg">
-				        </a>
-				        <div class="content">
-				          <a class="author">Jenny Hess</a>
-				          <div class="metadata">
-				            <span class="date">Just now</span>
-				          </div>
-				          <div class="text">
-				            Elliot you are always so right :)
-				          </div>
-				          <div class="actions">
-				            <a class="reply">回复</a>
-				          </div>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				  <div class="comment">
-				    <a class="avatar">
-				      <img src="../static/img/pepole.jpg">
-				    </a>
-				    <div class="content">
-				      <a class="author">Joe Henderson</a>
-				      <div class="metadata">
-				        <span class="date">5 days ago</span>
-				      </div>
-				      <div class="text">
-				        Dude, this is awesome. Thanks so much
-				      </div>
-				      <div class="actions">
-				        <a class="reply">回复</a>
-				      </div>
-				    </div>
-				  </div>
-				  <!-- <form class="ui reply form">
-				    <div class="field">
-				      <textarea></textarea>
-				    </div>
-				    <div class="ui blue labeled submit icon button">
-				      <i class="icon edit"></i> 评论
-				    </div>
-				  </form> -->
+
+					</div>
+				</div>
 				  <br/>
 				   <br/>
-				  <div class="ui form">
+				  <div id="comment-form" class="ui form" >
+					  <input type="hidden" name="blog.id" th:value="${blog.id}">
+					  <input type="hidden" name="parentComment.id" value="-1">
 					  <div class="field">
 						  <textarea name="content" placeholder="请输入评论信息"></textarea>
 					  </div>
@@ -231,11 +166,11 @@ file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
 							  </div>
 						  </div>
 						  <div class="field">
-							  <button class="ui teal button"> <i class="icon edit"></i> 评论</button>
+							  <button id="commentpost-btn" type="button" class="ui teal button"> <i class="edit icon"></i> 评论</button>
 						  </div>
 					  </div>
 				  </div>
-				</div>
+
 			</div>
 		</div>
 		</div>
@@ -255,7 +190,6 @@ file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
 		<!-- 目录生成 -->
 		<div class="ui toc-contment  flowing popup transition hidden" style="width: 250px;">
 			<ol class="js-toc">
-				
 			</ol>
 		</div>
 		<br />
@@ -277,7 +211,7 @@ file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
 				<!-- 相当于bootstarp把一行分割成16份 -->
 				<div class="ui inverted divided stackable grid">
 					<div class="three wide column">
-					  <img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 150px;"/>
+					  <img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" class="ui rounded image" style="width: 150px;"/>
 					 </div>
 					<div class="four wide column">
 						<h4 class="ui inverted header">最新博客</h4>
@@ -348,6 +282,69 @@ file:///C:/Users/ASUS/Desktop/davidshimjs-qrcodejs-04f46c6/qrcode.js
 		      colorLight : "#ffffff",
 		      correctLevel : QRCode.CorrectLevel.H
 		  });
+
+		  /*表单的验证*/
+		$('.ui.form').form({
+			fields: {
+				content: {
+					identifier: 'content',
+					rules: [{
+						type: 'empty',
+						prompt: '内容：内容不能为空！'
+					}]
+				},
+				nickname: {
+					identifier: 'nickname',
+					rules: [{
+						type: 'empty',
+						prompt: '名称内容：名称不能为空！'
+					}]
+				},
+				type: {
+					identifier: 'email',
+					rules: [{
+						type: 'email',
+						prompt: '请输入正确的邮箱地址！'
+					}]
+				}
+			}
+		});
+
+		/*评论的表单提交*/
+		$('#commentpost-btn').click(function (){
+			var boo=$('.ui.form').form('validate form');
+			if(boo){
+				console.log("校验成功");
+				postData();
+			}else {
+				console.log("校验失败");
+			}
+		});
+
+		function postData(){
+			$("#comment-container").load(/*[[@{/comment}]]*/"",{
+				"parentComment.id": $("[name='parentComment.id']").val(),
+				"blog.id": $("[name='blog.id']").val(),
+				"nickname": $("[name='nickname']").val(),
+				"email": $("[name='email']").val(),
+				"content": $("[name='content']").val(),
+			},function (responseTxt,statusTxt,xhr){
+					$(window).scrollTo($('#comment-container'),500);
+                clearContent();
+			});
+		}
+		function clearContent(){
+			$("[name='content']").val('');
+			$("[name='parentComment.id']").val(-1);
+			$("[name='content']").attr("placeholder","请输入评论信息...");
+		}
+		function reply(obj){
+			var commentId=$(obj).data('commentid');
+			var commentNickname=$(obj).data('commentnickname');
+			$("[name='content']").attr("placeholder","@"+commentNickname).focus();//把评论框中的“请输入评论信息”，改成“@+名字”
+			$("[name='parentComment.id']").val(commentId);
+			$(window).scrollTo($('#comment-form'),500);
+		}
 		</script>
 	</body>
 </html>

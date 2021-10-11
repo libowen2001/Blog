@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-	<head th:replace="_fragments :: head(~{::title})">
+	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width,initial-scale=1.0" />
 		<title>关于我</title>
-		<script src="../static/js/jquery-3.6.0.min.js"></script>
+		<script src="../static/js/jquery-3.6.0.min.js" th:src="@{/js/jquery-3.6.0.min.js}"></script>
 		<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-		<link rel="stylesheet" href="../static/css/mycss.css">
+		<link rel="stylesheet" href="../static/css/mycss.css" th:href="@{/css/mycss.css}">
 	</head>
 	<body>
 		<!-- 导航栏 -->
@@ -15,17 +15,19 @@
 			<div class="ui container">
 				<div class="ui inverted stackable menu">
 					<h2 class="ui teal header item">libowen</h2>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
-					   <a href="#" class=" my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
-					   <a href="#" class="active my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
-					   <div class="right my-item  item my-mobile-hide">
-						   <div class="ui icon  input">
-							   <input type="text" placeholder="Search..."/>
-							   <i class="search link icon"></i>
-						   </div>
-					   </div>
+					<a href="#" th:href="@{/}" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
+					<a href="#"  th:href="@{/types/-1}" class=" my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
+					<a href="#"  th:href="@{/archives}" class="my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
+					<a href="#" th:href="@{/tags/-1}" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
+					<a href="#"  th:href="@{/aboutme}" class="active my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
+					<div class="right my-item  item my-mobile-hide">
+						<form name="search" th:action="@{/search}" method="post" target="_blank">
+							<div class="ui icon  input">
+								<input name="query" type="text" placeholder="Search..." th:value="${query}"/>
+								<i onclick="document.forms['search'].submit()" class="search link icon"></i>
+							</div>
+						</form>
+					</div>
 				</div>
 			</div>
 			<a href="#" class="ui menu toggle black icon button my-right-top my-mobile-show">
@@ -40,7 +42,7 @@
 		<div class="ui contain">
 			<div class="ui stackable grid">
 				<div class="ten wide column">
-						<img src="../static/img/pepole.jpg" class="ui  rounded image" style="width: 450px;height: 400px;"/>
+						<img src="../static/img/pepole.jpg" th:src="@{/img/pepole.jpg}" class="ui  rounded image" style="width: 450px;height: 400px;"/>
 				</div>
 				<div class="six wide column">
 					<div class="ui top center aligned segment">
@@ -64,10 +66,10 @@
 					</div>
 					<div class="ui bottom segment">
 						<a class="ui wechat circular icon button"><i class="weixin icon"></i></a>
-						<a class="ui qq circular icon button" data-content="319871391"><i class="qq icon"></i></a>
+						<a class="ui qq circular icon button" data-content="319871391" th:attr="data-content='319871391'" ><i class="qq icon"></i></a>
 					</div>
 					<div class="ui weixin-QR flowing popup transition hidden">
-						<img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 110px;" />
+						<img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" class="ui rounded image" style="width: 110px;" />
 					 </div>
 				</div>
 			</div>
@@ -87,39 +89,18 @@
 		<br/>
 		<br/>
 		<!-- 底部部分 -->
-		<footer class="ui inverted vertical segment">
-			<div class="ui center aligned container">
-				<!-- 相当于bootstarp把一行分割成16份 -->
-				<div class="ui inverted divided stackable grid">
-					<div class="three wide column">
-					  <img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 150px;"/>
-					 </div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">最新博客</h4>
-						<div class="ui inverted link list">
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-						</div>
-					</div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">联系方式</h4>
-						<div class="ui inverted link list">
-							<span>邮箱：319871391@qq.com</span>
-							<br />
-							<br />
-							<span>QQ:31987191</span>
-						</div>
-					</div>
-					<div class="five wide column">
-						<h4 class="ui inverted header">libowen</h4>
-						<p>欢迎大家一起来交流学习</p>
-					</div>
-				</div>
-				<div class="ui inverted section divider"></div>
-					<p>禁止转载什么一些乱七八糟的东西</p>
-			</div>
+		<footer th:replace="_fragments :: footer" class="ui inverted vertical segment">
+
 		</footer>
+		<th:block th:replace="_fragments :: script">
+			<script>
+				/* 菜单在手机端的点击显示 */
+				$('.menu.toggle').click(function(){
+					$('.my-item').toggleClass('my-mobile-hide');
+				});
+				$('#newblog-container').load(/*[[@{/newblogs}]]*/"/newblogs");
+			</script>
+		</th:block>
 		<script>
 		/* 菜单在手机端的点击显示 */
 		  $('.menu.toggle').click(function(){

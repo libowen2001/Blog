@@ -10,7 +10,7 @@ import java.util.List;
 public class Blog {
     @Id
     @GeneratedValue
-    private long id;
+    private Long id;
     private String title;//标题
     private String content;//内容
     private String firstPicture;//图片
@@ -21,6 +21,7 @@ public class Blog {
     private boolean commentabled;//评论功能是否开启
     private boolean published;//发布是否开启
     private boolean recommend;//是否推荐
+    private String description;//博客简介
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;//创建时间
     @Temporal(TemporalType.TIMESTAMP)
@@ -29,20 +30,23 @@ public class Blog {
     @ManyToOne
     private Type type;
     @ManyToMany(cascade = {CascadeType.PERSIST})//级联新增
+
     private List<Tag> tags=new ArrayList<>();
     @ManyToOne
     private User user;
     @OneToMany(mappedBy = "blog")
     private List<Comment> comments=new ArrayList<>();
+    @Transient
+    private String ids;
     public Blog() {
 
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -174,6 +178,45 @@ public class Blog {
         this.comments = comments;
     }
 
+    public String getIds() {
+        return ids;
+    }
+
+    public void setIds(String ids) {
+        this.ids = ids;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    //把属性ids设置成数值
+    public void init(){
+      this.ids=tagsToIds(this.getTags());
+    }
+    private String tagsToIds(List<Tag> tags){
+        if(!tags.isEmpty()){
+            StringBuffer ids=new StringBuffer();
+            boolean flag=false;
+            for(Tag tag:tags){
+                if(flag){
+                    ids.append(",");
+                }else {
+                    flag=true;
+                }
+                ids.append(tag.getId());
+            }
+            return ids.toString();
+        }else{
+            return ids;
+        }
+
+    }
+
     @Override
     public String toString() {
         return "Blog{" +
@@ -188,8 +231,14 @@ public class Blog {
                 ", commentabled=" + commentabled +
                 ", published=" + published +
                 ", recommend=" + recommend +
+                ", description='" + description + '\'' +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tags=" + tags +
+                ", user=" + user +
+                ", comments=" + comments +
+                ", ids='" + ids + '\'' +
                 '}';
     }
 }

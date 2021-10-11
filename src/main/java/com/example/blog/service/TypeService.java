@@ -14,5 +14,5 @@ public interface TypeService {
     void deleteType(Long id);//删除一个分类对象
     Type getTypeByName(String name);
     List<Type> listType();
-
-}
+    List<Type> listTypeTop(Integer size);
+ }

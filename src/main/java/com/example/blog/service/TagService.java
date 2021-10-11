@@ -1,7 +1,6 @@
 package com.example.blog.service;
 
 import com.example.blog.po.Tag;
-import com.example.blog.po.Type;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -15,4 +14,6 @@ public interface TagService {
     void deleteTag(Long id);//删除一个分类对象
     Tag getTagByName(String name);
     List<Tag> listTag();
+    List<Tag> listTag(String ids);
+    List<Tag> listTagTop(Integer size);
 }

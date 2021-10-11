@@ -15,17 +15,20 @@
 			<div class="ui container">
 				<div class="ui inverted stackable menu">
 					<h2 class="ui teal header item">libowen</h2>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
-					   <a href="#" class=" my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
-					   <a href="#" class="active my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
-					   <a href="#" class=" my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
-					   <a href="#" class="my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
-					   <div class="right my-item  item my-mobile-hide">
-						   <div class="ui icon  input">
-							   <input type="text" placeholder="Search..."/>
-							   <i class="search link icon"></i>
-						   </div>
-					   </div>
+					<a href="#" th:href="@{/}" class="my-item item my-mobile-hide"><i class="home icon"></i>首页</a>
+					<a href="#"  th:href="@{/types/-1}" class=" my-item item my-mobile-hide"><i class="idea icon"></i>分类</a>
+					<a href="#"  th:href="@{/archives}" class="active my-item item my-mobile-hide"><i class="clone icon"></i>归档</a>
+					<a href="#" th:href="@{/tags/-1}" class="my-item item my-mobile-hide"><i class="tags icon"></i>标签</a>
+					<a href="#"  th:href="@{/aboutme}" class="my-item item my-mobile-hide"><i class="info icon"></i>关于我</a>
+					<div class="right my-item  item my-mobile-hide">
+						<form name="search" th:action="@{/search}" method="post" target="_blank">
+							<div class="ui icon  input">
+								<input name="query" type="text" placeholder="Search..." th:value="${query}"/>
+								<i onclick="document.forms['search'].submit()" class="search link icon"></i>
+							</div>
+						</form>
+
+					</div>
 				</div>
 			</div>
 			<a href="#" class="ui menu toggle black icon button my-right-top my-mobile-show">
@@ -44,92 +47,23 @@
 						<h3 class="ui teal header">归档</h3>
 						</div>
 					<div class="right aligned column">
-						共<h3 class="ui orange header my-inline-block">14</h3>个
+						共<h3 class="ui orange header my-inline-block" th:text="${blogcount}">14</h3>个
 					</div>
 					</div>
 				</div>
 			</div>
-			<h2 class="ui center aligned header">2021</h2>
+			<th:block th:each="item : ${archives}">
+			<h2 class="ui center aligned header" th:text="${item.key}">2021</h2>
 			<div class="ui fluid vertical menu">
-				<a href="#" target="_blank" class="item">
+				<a href="#" th:href="@{/blog/{id}(id=${blog.id})}" target="_blank" class="item" th:each="blog : ${item.value}">
 				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
+					<i class="ui teal circle icon"></i><span th:text="${blog.title}">中国优秀散文</span>
+					<div class="ui teal left pointing basic label" th:text="${#dates.format(blog.updateTime,'MMMdd')}">9月15日</div>
 				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
+					 <div class="ui orange left pointing basic label my-margin-middle" th:text="${blog.flag}">原创</div>
 				</a>
 			</div>
-			<h2 class="ui center aligned header">2020</h2>
-			<div class="ui fluid vertical menu">
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-			</div>
-			<h2 class="ui center aligned header">2019</h2>
-			<div class="ui fluid vertical menu">
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-				<a href="#" target="_blank" class="item">
-				  <span>
-					<i class="ui teal circle icon"></i>中国优秀散文
-					<div class="ui teal left pointing basic label">9月15日</div>
-				  </span>
-					 <div class="ui orange left pointing basic label my-margin-middle">原创</div>
-				  
-				</a>
-			</div>
+			</th:block>
 		</div>
 		<br />
 		<br />
@@ -145,45 +79,17 @@
 		<br />
 		<br />
 		<!-- 底部部分 -->
-		<footer class="ui inverted vertical segment">
-			<div class="ui center aligned container">
-				<!-- 相当于bootstarp把一行分割成16份 -->
-				<div class="ui inverted divided stackable grid">
-					<div class="three wide column">
-					  <img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 150px;"/>
-					 </div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">最新博客</h4>
-						<div class="ui inverted link list">
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-						</div>
-					</div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">联系方式</h4>
-						<div class="ui inverted link list">
-							<span>邮箱：319871391@qq.com</span>
-							<br />
-							<br />
-							<span>QQ:31987191</span>
-						</div>
-					</div>
-					<div class="five wide column">
-						<h4 class="ui inverted header">libowen</h4>
-						<p>欢迎大家一起来交流学习</p>
-					</div>
-				</div>
-				<div class="ui inverted section divider"></div>
-					<p>禁止转载什么一些乱七八糟的东西</p>
-			</div>
+		<footer th:replace="_fragments :: footer" class="ui inverted vertical segment">
+
 		</footer>
-		<script>
-		/* 菜单在手机端的点击显示 */
-		  $('.menu.toggle').click(function(){
-			  $('.my-item').toggleClass('my-mobile-hide');
-		  });
-		 
-		</script>
+		<th:block th:replace="_fragments :: script">
+			<script>
+				/* 菜单在手机端的点击显示 */
+				$('.menu.toggle').click(function(){
+					$('.my-item').toggleClass('my-mobile-hide');
+				});
+				$('#newblog-container').load(/*[[@{/newblogs}]]*/"/newblogs");
+			</script>
+		</th:block>
 	</body>
 </html>

@@ -41,8 +41,8 @@
 		<div class="ui pointing menu">
 			<div class="ui container">
 				<div class="right menu">
-					<a href="#" class="item">发布</a>
-					<a href="#" class="teal active item">列表</a>
+					<a href="#" th:href="@{/admin/blogs/input}" class="item">发布</a>
+					<a href="#" th:href="@{/admin/blogs}" class="teal active item">列表</a>
 				</div>
 			</div>
 		</div>
@@ -88,35 +88,42 @@
 							<th>标题</th>
 							<th>类型</th>
 							<th>推荐</th>
+                            <th>状态</th>
 							<th>更新时间</th>
 							<th>操作</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="blog ,iterStat: ${page.content}">
-							<th th:text="${iterStat.count}">1</th>
-							<th th:text="${blog.title}">中国优秀散文</th>
-							<th th:text="${blog.type.name}">赏析升级</th>
-							<th th:text="${blog.recommend} ? '是' :'否'">是</th>
-							<th th:text="${blog.updateTime}">2021.9.24</th>
-							<th>
-								<a th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui teal basic mini button">编辑</a>
-								<a th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red basic mini button">删除</a>
-							</th>
+							<td th:text="${iterStat.count}">1</td>
+							<td th:text="${blog.title}">中国优秀散文</td>
+							<td th:text="${blog.type.name}">赏析升级</td>
+							<td th:text="${blog.recommend} ? '是' :'否'">是</td>
+							<td th:text="${blog.published} ? '发布' : '草稿'"></td>
+							<td th:text="${blog.updateTime}">2021.9.24</td>
+							<td>
+								<a href="#" th:href="@{/admin/blogs/{id}/input(id=${blog.id})}" class="ui teal basic mini button">编辑</a>
+								<a href="#" th:href="@{/admin/blogs/{id}/delete(id=${blog.id})}" class="ui red basic mini button">删除</a>
+							</td>
 						</tr>
 					</tbody>
 					<tfoot>
 						<tr>
-							<th colspan="6">
+							<th colspan="7">
 								<div class="ui mini pagination menu" th:if="${page.totalPages}>1">
-									<a onclick="page(this)" th:attr="data-page=${page.number}-1)}"  class="item" th:unless="${page.first}">上一页</a>
-									<a onclick="page(this)" th:attr="data-page=${page.number}+1)}" class="item" th:unless="${page.last}">下一页</a>
+									<a onclick="page(this)" th:attr="data-page=${page.number}-1"  class="item" th:unless="${page.first}">上一页</a>
+									<a onclick="page(this)" th:attr="data-page=${page.number}+1" class="item" th:unless="${page.last}">下一页</a>
 								</div>
 								<a th:href="@{/admin/blogs/input}" class="ui teal basic right floated button">新增</a>
 							</th>
 						</tr>
 					</tfoot>
 				</table>
+					<div class="ui success message" th:unless="${#strings.isEmpty(message)}" >
+						<i class="close icon"></i>
+						<div class="ui header">提示：</div>
+						<p th:text="${message}"></p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -174,12 +181,19 @@
 		  });
 		 /* 用户注销*/
 		 $('.ui.dropdown').dropdown();
+		 /*分类选中取消*/
+		$('.ui.selection.dropdown')
+				.dropdown({
+					clearable: true
+				})
+		;
 		 /**/
 		 function page(obj) {
            $("[name='page']").val($(obj).data("page"));
            loaddata();
 		 }
 		 $("#search-btn").click(function (){
+			 $("[name='page']").val(0);
 		 	loaddata();
 		 });
 		 function loaddata(){
@@ -190,6 +204,13 @@
 				page : $("[name='page']").val()
 			 });
 		 }
+		/*操作成功或失败的消息关闭*/
+		$('.message .close')
+				.on('click', function (){
+					$(this)
+							.closest('.message')
+							.transition('fade');
+				});
 		</script>
 	</body>
 </html>

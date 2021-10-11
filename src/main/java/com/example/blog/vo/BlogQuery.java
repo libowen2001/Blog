@@ -31,4 +31,5 @@ public class BlogQuery {
     public void setRecommend(boolean recommend) {
         this.recommend = recommend;
     }
+
 }
