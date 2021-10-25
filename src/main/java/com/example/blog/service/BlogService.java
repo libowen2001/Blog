@@ -21,4 +21,5 @@ public interface BlogService {
     Page<Blog> listTag(Long id, Pageable pageable);
     Map<String,List<Blog>> archiveBlog();//按照年份查询博客，输出到归档页面
     Long count();
+    Integer viewsadd(Long id);
 }

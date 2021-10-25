@@ -113,39 +113,13 @@
 		<br />
 		<br />
 		<!-- 底部部分 -->
-		<footer class="ui inverted vertical segment">
-			<div class="ui center aligned container">
-				<!-- 相当于bootstarp把一行分割成16份 -->
-				<div class="ui inverted divided stackable grid">
-					<div class="three wide column">
-					  <img src="../static/img/wechat.jpg" class="ui rounded image" style="width: 150px;"/>
-					 </div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">最新博客</h4>
-						<div class="ui inverted link list">
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-						</div>
-					</div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">联系方式</h4>
-						<div class="ui inverted link list">
-							<span>邮箱：319871391@qq.com</span>
-							<br />
-							<br />
-							<span>QQ:31987191</span>
-						</div>
-					</div>
-					<div class="five wide column">
-						<h4 class="ui inverted header">libowen</h4>
-						<p>欢迎大家一起来交流学习</p>
-					</div>
-				</div>
-				<div class="ui inverted section divider"></div>
-					<p>禁止转载什么一些乱七八糟的东西</p>
-			</div>
+
+		<footer th:replace="_fragments :: footer" class="ui inverted vertical segment">
+
 		</footer>
+		<th:block th:replace="_fragments :: script">
+
+		</th:block>
 		<script>
 		/* 菜单在手机端的点击显示 */
 		  $('.menu.toggle').click(function(){
@@ -153,5 +127,6 @@
 		  });
 		 
 		</script>
+
 	</body>
 </html>

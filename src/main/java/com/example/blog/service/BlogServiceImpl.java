@@ -105,11 +105,11 @@ public class BlogServiceImpl implements BlogService {
         if(blog==null){
             throw new NotFoundException("博客不存在");
         }
-        Blog b=new Blog();
-        BeanUtils.copyProperties(blog,b);
-        String content=b.getContent();
-        b.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
-        return b;
+        /*Blog b=new Blog();
+        BeanUtils.copyProperties(blog,b);*/
+        String content=blog.getContent();
+        blog.setContent(MarkdownUtils.markdownToHtmlExtensions(content));
+        return blog;
     }
     //博客和标签的关联查询
     @Override
@@ -137,5 +137,10 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public Long count() {
         return blogRepository.count();
+    }
+    @Transactional
+    @Override
+    public Integer viewsadd(Long id) {
+        return blogRepository.addViews(id);
     }
 }

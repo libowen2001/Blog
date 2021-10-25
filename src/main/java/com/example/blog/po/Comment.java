@@ -26,6 +26,7 @@ public class Comment {
     private List<Comment> replayComments=new ArrayList<>();
     @ManyToOne
     private Comment parentComment;
+    private boolean adminComment;
     public Comment() {
     }
 
@@ -99,6 +100,14 @@ public class Comment {
 
     public void setParentComment(Comment parentComment) {
         this.parentComment = parentComment;
+    }
+
+    public boolean isAdminComment() {
+        return adminComment;
+    }
+
+    public void setAdminComment(boolean adminComment) {
+        this.adminComment = adminComment;
     }
 
     @Override

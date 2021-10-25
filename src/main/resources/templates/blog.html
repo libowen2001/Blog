@@ -85,6 +85,7 @@
 				<div class="ui basic segment my-padding-lr" th:each="tag : ${blog.tags}">
 					<div class="ui teal left pointing basic  label " th:text="${tag.name}">方法论</div>
 				</div>
+				<div th:if="${blog.appreciation}">
 				<div class="ui center aligned basic segment">
 					<button id="paybutton" class="ui orange basic circular button">赞赏</button>
 				</div>
@@ -102,8 +103,9 @@
 					</div>
 				</div>
 				</div>
+				</div>
 			</div>
-			<div class="ui attached message">
+			<div class="ui attached message" th:if="${blog.shareStatement}">
 				<!-- 博客信息 -->
 				<div class="ui middle aligned grid">
 					<div class="eleven wide column">
@@ -121,14 +123,17 @@
 			</div>
 			<div class="ui bottom attached  segment">
 				<div id="comment-container" class="ui teal comments" >
-					<div  th:fragment="commentlist">
+					<div   th:fragment="commentlist">
 				  <h3 class="ui dividing header">Comments</h3>
 				  <div class="comment" th:each="comment : ${comments}">
 				    <a class="avatar">
-				      <img src="../static/img/pepole.jpg" th:src="@{${comment.avatar}">
+				      <img src="../static/img/pepole.jpg" th:src="@{/img/pepole.jpg}">
 				    </a>
 				    <div class="content">
-				      <a class="author" th:text="${comment.nickname}">Matt</a>
+				      <a class="author" >
+						  <sapn th:text="${comment.nickname}">Matt</sapn>
+						  <div class="ui mini basic teal left pointing label" th:if="${comment.adminComment}">博主</div>
+					  </a>
 				      <div class="metadata">
 				        <span class="date" th:text="${#dates.format(comment.createTime,'yyyy-MM-dd hh-mm')}">Today at 5:42PM</span>
 				      </div>
@@ -136,16 +141,39 @@
 				        How artistic!
 				      </div>
 				      <div class="actions">
-				        <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}",onclick="reply(this)">回复</a>
+				        <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}" onclick="reply(this)">回复</a>
 				      </div>
 				    </div>
+					  <div class="comments" th:if="${#arrays.length(comment.replayComments)}>0">
+						  <div class="comment" th:each="reply : ${comment.replayComments}">
+							  <a class="avatar">
+								  <img src="../static/img/pepole.jpg" th:src="@{/img/pepole.jpg}">
+							  </a>
+							  <div class="content">
+								  <a class="author" >
+									  <span th:text="${reply.nickname}">Matt </span>
+										   <div class="ui mini basic teal left pointing label" th:if="${reply.adminComment}">博主</div>
+									 <span th:text="|@ ${reply.parentComment.nickname}|" class="teal"></span>
+								  </a>
+								  <div class="metadata">
+									  <span class="date" th:text="${#dates.format(reply.createTime,'yyyy-MM-dd hh-mm')}">Today at 5:42PM</span>
+								  </div>
+								  <div class="text" th:text="${reply.content}">
+									  How artistic!
+								  </div>
+								  <div class="actions">
+									  <a class="reply" data-commentid="1" data-commentnickname="Matt" th:attr="data-commentid=${reply.id},data-commentnickname=${reply.nickname}" onclick="reply(this)">回复</a>
+								  </div>
+							  </div>
+						  </div>
+					  </div>
 				  </div>
 
 					</div>
 				</div>
 				  <br/>
 				   <br/>
-				  <div id="comment-form" class="ui form" >
+				  <div id="comment-form" class="ui form" th:if="${blog.commentabled}" >
 					  <input type="hidden" name="blog.id" th:value="${blog.id}">
 					  <input type="hidden" name="parentComment.id" value="-1">
 					  <div class="field">
@@ -155,14 +183,14 @@
 						  <div class="field">
 							  <div class="ui left icon input">
 								  <i class="user icon"></i>
-							  	<input type="text" name="nickname" placeholder="姓名" />
+							  	<input type="text" name="nickname" placeholder="姓名" th:value="${session.user}!=null ? ${session.user.nickname}" />
 							  </div>
 							  
 						  </div>
 						  <div class="field">
 							  <div class="ui left icon input">
 								  <i class="mail icon"></i>
-						  	  <input type="text" name="email" placeholder="邮箱" />
+						  	  <input type="text" name="email" placeholder="邮箱" th:value="${session.user}!=null ? ${session.user.email}"/>
 							  </div>
 						  </div>
 						  <div class="field">
@@ -206,40 +234,13 @@
 		<br />
 		<br />
 		<!-- 底部部分 -->
-		<footer class="ui inverted vertical segment">
-			<div class="ui center aligned container">
-				<!-- 相当于bootstarp把一行分割成16份 -->
-				<div class="ui inverted divided stackable grid">
-					<div class="three wide column">
-					  <img src="../static/img/wechat.jpg" th:src="@{/img/wechat.jpg}" class="ui rounded image" style="width: 150px;"/>
-					 </div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">最新博客</h4>
-						<div class="ui inverted link list">
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-							<a href="#" class="item">...</a>
-						</div>
-					</div>
-					<div class="four wide column">
-						<h4 class="ui inverted header">联系方式</h4>
-						<div class="ui inverted link list">
-							<span>邮箱：319871391@qq.com</span>
-							<br />
-							<br />
-							<span>QQ:31987191</span>
-						</div>
-					</div>
-					<div class="five wide column">
-						<h4 class="ui inverted header">libowen</h4>
-						<p>欢迎大家一起来交流学习</p>
-					</div>
-				</div>
-				<div class="ui inverted section divider"></div>
-					<p>禁止转载什么一些乱七八糟的东西</p>
-			</div>
+
+		<footer th:replace="_fragments :: footer" class="ui inverted vertical segment">
+
 		</footer>
-		<script>
+		<th:block th:replace="_fragments :: script">
+		</th:block>
+		<script th:inline="javascript">
 		/* 菜单在手机端的点击显示 */
 		  $('.menu.toggle').click(function(){
 			  $('.my-item').toggleClass('my-mobile-hide');
@@ -310,6 +311,10 @@
 			}
 		});
 
+		/*显示评论信息*/
+		$(function () {
+			$("#comment-container").load("/comments/"+[[${blog.id}]]);
+		});
 		/*评论的表单提交*/
 		$('#commentpost-btn').click(function (){
 			var boo=$('.ui.form').form('validate form');
@@ -322,7 +327,7 @@
 		});
 
 		function postData(){
-			$("#comment-container").load(/*[[@{/comment}]]*/"",{
+			$("#comment-container").load("/comment",{
 				"parentComment.id": $("[name='parentComment.id']").val(),
 				"blog.id": $("[name='blog.id']").val(),
 				"nickname": $("[name='nickname']").val(),
