@@ -21,6 +21,7 @@ public class CommentController {
     private CommentService commentService;
     @Autowired
     private BlogService blogService;
+    //把头像写死了，可以修改
     @Value("${comment.avatar")
     private String avatar;
 
